@@ -101,5 +101,8 @@ build-dev
 # Ignore environment config file
 /*.env
 
-# Ignore service account json file
+# Ignore service account json file for vision api
 /papa-what-is-this-animal-a49ddf9806c9.json
+
+# Ignore images in uploads folder
+/uploads
