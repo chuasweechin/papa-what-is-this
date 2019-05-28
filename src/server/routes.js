@@ -1,6 +1,6 @@
-module.exports = (app, db) => {
-  const products = require('./controllers/products')(db);
+module.exports = (app) => {
+  const analyze = require('./controllers/analyze')();
 
-  app.post('/products', products.getAll);
+  app.post('/analyze', analyze.getAll);
 
 };

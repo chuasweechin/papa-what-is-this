@@ -19,10 +19,9 @@ class Result extends React.Component {
             );
         });
 
-
         const visuallySimilarImagesElements = this.props.result[0].visuallySimilarImages.map( (item, index) => {
             return (
-                    <img key={ item.key } src={ item.url } height="100px" alt=" Similar image..."/>
+                    <img key={ index + 1 } src={ item.url } height="100px" alt=" Similar image..."/>
             );
         });
 
@@ -50,7 +49,6 @@ class Result extends React.Component {
           </div>
         );
     }
-
   }
 }
 

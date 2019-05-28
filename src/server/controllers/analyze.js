@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const vision = require('@google-cloud/vision');
 
-module.exports = (db) => {
+module.exports = () => {
     const client = new vision.ImageAnnotatorClient();
     const GOOGLE_KNOWLEDGE_GRAPH_API_KEY = process.env.GOOGLE_KNOWLEDGE_GRAPH_API_KEY;
 

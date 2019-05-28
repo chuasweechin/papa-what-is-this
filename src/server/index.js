@@ -1,9 +1,7 @@
 const http = require('http');
 const express = require('express');
 const methodOverride = require('method-override');
-const db = require('./db');
 const multer  = require('multer');
-// const upload = multer({ dest: 'uploads/' });
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 process.env.PORT = process.env.PORT || 3000;
@@ -49,7 +47,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jsx');
 app.engine('jsx', reactEngine);
 
-require('./routes')(app, db);
+require('./routes')(app);
 
 // application routes (this goes last)
 setupAppRoutes(app);

@@ -47,7 +47,7 @@ class App extends React.Component {
             let formData = new FormData();
             formData.append("file", e.target.image.files[0]);
 
-            const response = await fetch("/products", {
+            const response = await fetch("/analyze", {
                 method: 'POST',
                 mode: 'cors',
                 credentials: 'same-origin',
