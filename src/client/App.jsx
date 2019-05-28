@@ -39,6 +39,8 @@ class App extends React.Component {
     async searchHandler(e) {
         e.preventDefault();
 
+        this.setState({ "result": [] });
+
         if (e.target.image.files.length === 0) {
             this.setState({ "valid": false });
         } else {
@@ -57,7 +59,6 @@ class App extends React.Component {
 
             const data = await response.json();
             // console.log([data]);
-
             this.setState({ "result": [data], "loading": false  });
         }
     }

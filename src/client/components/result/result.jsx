@@ -4,15 +4,25 @@ import PropTypes from 'prop-types';
 import styles from './styles.scss'
 
 class Result extends React.Component {
+
+    playSpeechHandler(index) {
+        document.querySelectorAll("audio")[index].play();
+    }
+
     render() {
         if (this.props.result.length !== 0) {
             const webEntitiesElements = this.props.result[0].webEntities.map( (item, index) => {
                 return (
                     <tr key={ index + 1 }>
+                        <td className={ styles.play }>
+                            <audio name="speech" src={ item.speechUrl } type="audio/mpeg"></audio>
+                            <button id={ index } type="button" onClick={ () => { this.playSpeechHandler(index) } }>Read Text</button>
+                        </td>
                         <td className={ item.score > 0.8 ? styles.high : '' }>
                             { item.description }
                         </td>
-                        <td className={ item.score > 0.8 ? styles.high : '' }>
+
+                        <td className={ item.score > 0.8 ? styles.high + ' ' + styles.score : styles.score }>
                             { item.score.toFixed(2) }
                         </td>
                     </tr>
@@ -27,17 +37,16 @@ class Result extends React.Component {
 
             return (
               <div>
-                <div>
-                    <p className={ styles.desc }>Entities identified within the uploaded image.</p>
-                    <table className={ styles.result + " table" }>
-                        <tbody>
-                            { webEntitiesElements }
-                        </tbody>
-                    </table>
-                </div>
+                <p className={ styles.desc }>Entities identified within the uploaded image</p>
+                <table className={ styles.result + " table" }>
+                    <tbody>
+                        { webEntitiesElements }
+                    </tbody>
+                </table>
+
                 <br/>
 
-                <p className={ styles.desc }>Visually similiar images with the uploaded image.</p>
+                <p className={ styles.desc }>Visually similiar images with the uploaded image</p>
                 <div className={ styles.visuallySimilarImages }>
                     { visuallySimilarImagesElements }
                 </div>
