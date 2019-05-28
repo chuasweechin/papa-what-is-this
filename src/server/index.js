@@ -7,7 +7,10 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 process.env.PORT = process.env.PORT || 3000;
 
 // make sure user defined env config exist
-if (process.env.GOOGLE_APPLICATION_CREDENTIALS === undefined || process.env.GOOGLE_KNOWLEDGE_GRAPH_API_KEY === undefined) {
+if (process.env.GOOGLE_STORAGE_URL === undefined
+        || process.env.GOOGLE_STORAGE_BUCKET_NAME === undefined
+            || process.env.GOOGLE_APPLICATION_CREDENTIALS === undefined
+                || process.env.GOOGLE_KNOWLEDGE_GRAPH_API_KEY === undefined) {
     onUnhandledError("Missing ENV config");
 }
 
@@ -39,10 +42,11 @@ app.use(
 app.use(express.json());
 
 // this is to enable request.body for multi-part form request
-app.use(multer({dest:'./uploads/'}).single('file'));
+app.use(multer({ dest:'./src/server/uploads/images/' }).single('file'));
 
 // Set react-views to be the default view engine
 const reactEngine = require('express-react-views').createEngine();
+
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jsx');
 app.engine('jsx', reactEngine);

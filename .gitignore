@@ -104,5 +104,5 @@ build-dev
 # Ignore service account json file for vision api
 /papa-what-is-this-animal-a49ddf9806c9.json
 
-# Ignore images in uploads folder
-/uploads
+# Ignore images and speeches in uploads folder
+/src/server/uploads

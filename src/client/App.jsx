@@ -12,10 +12,10 @@ class App extends React.Component {
         super();
 
         this.state = {
-            imageSrc: "",
             result: [],
-            loading: false,
             valid: true,
+            imageSrc: "",
+            loading: false,
             imageFileName: ""
         };
     }
@@ -56,7 +56,7 @@ class App extends React.Component {
             });
 
             const data = await response.json();
-            console.log([data]);
+            // console.log([data]);
 
             this.setState({ "result": [data], "loading": false  });
         }
