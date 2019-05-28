@@ -67,7 +67,7 @@ class App extends React.Component {
             <div>
                 <div className="container">
                     <div className="row">
-                        <div className="col-5">
+                        <div className={ styles.search + " col-5" }>
                             <Search
                                 valid={ this.state.valid }
                                 loading={ this.state.loading }
@@ -80,7 +80,7 @@ class App extends React.Component {
                                 imageSrc={ this.state.imageSrc }
                             />
                         </div>
-                        <div className="col">
+                        <div className={ styles.result + " col-7" }>
                             <Result
                                 result={ this.state.result }
                             />

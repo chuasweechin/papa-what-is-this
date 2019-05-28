@@ -28,7 +28,7 @@ class Search extends React.Component {
                                         id="inputGroupFile01"
                                         aria-describedby="inputGroupFileAddon01"
                                     />
-                                    <label className="custom-file-label" htmlFor="inputGroupFile01">{ imageFileName }</label>
+                                    <label className={ styles.upload + " custom-file-label" } htmlFor="inputGroupFile01">{ imageFileName }</label>
                                     { errorMsg }
                                 </div>
                             </div>
@@ -49,7 +49,7 @@ class Search extends React.Component {
                                         aria-describedby="inputGroupFileAddon01"
                                         disabled
                                     />
-                                    <label className="custom-file-label" htmlFor="inputGroupFile01">{ imageFileName }</label>
+                                    <label className={ styles.upload + " custom-file-label" } htmlFor="inputGroupFile01">{ imageFileName }</label>
                                     { errorMsg }
                                 </div>
                             </div>

@@ -1,3 +1,14 @@
-body, html {
-	margin: 10px;
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+.search {
+	padding: 30px;
+	min-height: 800px;
+	border-right: 3px solid #EBEBEB;
+}
+
+.result {
+	min-height: 800px;
+	padding: 30px 30px 30px 75px;
 }

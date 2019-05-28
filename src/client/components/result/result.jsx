@@ -9,38 +9,41 @@ class Result extends React.Component {
         const webEntitiesElements = this.props.result[0].webEntities.map( (item, index) => {
             return (
                 <tr key={ index + 1 }>
-                    <td>
-                        { index + 1 }
-                    </td>
-                    <td>
+                    <td className={ item.score > 0.8 ? styles.high : '' }>
                         { item.description }
                     </td>
-                    <td>
+                    <td className={ item.score > 0.8 ? styles.high : '' }>
                         { item.score.toFixed(2) }
                     </td>
                 </tr>
             );
         });
 
+
+        const visuallySimilarImagesElements = this.props.result[0].visuallySimilarImages.map( (item, index) => {
+            return (
+                    <img key={ item.key } src={ item.url } height="100px" alt=" Similar image..."/>
+            );
+        });
+
         return (
           <div>
-            <h5>Analyzed Results:</h5>
-            <table className={ styles.result + " table table-striped table-bordered" }>
-                <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Description</th>
-                      <th scope="col">Confidence Score</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    { webEntitiesElements }
-                </tbody>
-            </table>
+            <div>
+                <p className={ styles.desc }>Entities identified within the uploaded image.</p>
+                <table className={ styles.result + " table" }>
+                    <tbody>
+                        { webEntitiesElements }
+                    </tbody>
+                </table>
+            </div>
+            <br/>
 
+            <p className={ styles.desc }>Visually similiar images with the uploaded image.</p>
+            <div className={ styles.visuallySimilarImages }>
+                { visuallySimilarImagesElements }
+            </div>
           </div>
         );
-
     } else {
         return (
           <div>

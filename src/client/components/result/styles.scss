@@ -1,3 +1,24 @@
 .result {
+	width: 80%;
+	font-size: 13px;
+}
+
+.desc {
+	font-weight: bold;
 	font-size: 14px;
+}
+
+.high {
+	color: #007BFC;
+}
+
+.visuallySimilarImages {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.visuallySimilarImages > img {
+	margin: 2px;
+	border-radius: 5px;
+	border: 1px solid darkgrey;
 }
