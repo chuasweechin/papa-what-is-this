@@ -9,8 +9,7 @@ process.env.PORT = process.env.PORT || 3000;
 // make sure user defined env config exist
 if (process.env.GOOGLE_STORAGE_URL === undefined
         || process.env.GOOGLE_STORAGE_BUCKET_NAME === undefined
-            || process.env.GOOGLE_APPLICATION_CREDENTIALS === undefined
-                || process.env.GOOGLE_KNOWLEDGE_GRAPH_API_KEY === undefined) {
+            || process.env.GOOGLE_APPLICATION_CREDENTIALS === undefined) {
     onUnhandledError("Missing ENV config");
 }
 
