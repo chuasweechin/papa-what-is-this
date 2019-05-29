@@ -7,8 +7,22 @@ const textToSpeech = require('@google-cloud/text-to-speech');
 
 module.exports = () => {
     const storageClient = new Storage();
-    const visionClient = new vision.ImageAnnotatorClient();
-    const speechClient = new textToSpeech.TextToSpeechClient();
+
+    const visionClient = new vision.ImageAnnotatorClient({
+        projectId: process.env.GOOGLE_PROJECT_ID,
+        credentials: {
+            private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+            client_email: process.env.GOOGLE_CLIENT_EMAIL
+        }
+    });
+
+    const speechClient = new textToSpeech.TextToSpeechClient({
+        projectId: process.env.GOOGLE_PROJECT_ID,
+        credentials: {
+            private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+            client_email: process.env.GOOGLE_CLIENT_EMAIL
+        }
+    });
 
     const GOOGLE_STORAGE_URL = process.env.GOOGLE_STORAGE_URL;
     const GOOGLE_STORAGE_BUCKET_NAME = process.env.GOOGLE_STORAGE_BUCKET_NAME;
