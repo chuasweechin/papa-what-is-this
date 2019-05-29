@@ -8,22 +8,26 @@ import styles from './styles.scss'
 class Result extends React.Component {
     render() {
         if (this.props.result.length !== 0) {
-            const webEntitiesElements = this.props.result[0].webEntities.map( (item, index) => {
-                return (
-                    <tr key={ index + 1 }>
-                        <td className={ styles.play }>
-                            <Play webEntity = { item }/>
-                        </td>
-                        <td className={ item.score > 0.8 ? styles.high : '' }>
-                            { item.description }
-                        </td>
+            const webEntitiesElements = this.props.result[0].webEntities
+                .filter((item) => {
+                    return item.description !== "";
+                })
+                .map((item, index) => {
+                    return (
+                        <tr key={ index + 1 }>
+                            <td className={ styles.play }>
+                                <Play webEntity = { item }/>
+                            </td>
+                            <td className={ item.score > 0.8 ? styles.high : '' }>
+                                { item.description }
+                            </td>
 
-                        <td className={ item.score > 0.8 ? styles.high + ' ' + styles.score : styles.score }>
-                            { item.score.toFixed(2) }
-                        </td>
-                    </tr>
-                );
-            });
+                            <td className={ item.score > 0.8 ? styles.high + ' ' + styles.score : styles.score }>
+                                { item.score.toFixed(2) }
+                            </td>
+                        </tr>
+                    );
+                });
 
             const visuallySimilarImagesElements = this.props.result[0].visuallySimilarImages.map( (item, index) => {
                 return (

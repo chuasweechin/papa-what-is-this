@@ -8,6 +8,7 @@ body {
 	padding-top: 20px;
 	text-align: center;
 	background-color: #282923;
+	border-bottom: 3px solid #EBEBEB;
 }
 
 .search {
@@ -28,13 +29,13 @@ body {
 
 	.search {
 		padding: 30px;
-		min-height: 400px;
+		min-height: 300px;
 		border-right: 0px solid #EBEBEB;
 		border-bottom: 3px solid #EBEBEB;
 	}
 
 	.result {
-		min-height: 400px;
+		min-height: 300px;
 		padding: 30px 30px 30px 30px;
 	}
 }

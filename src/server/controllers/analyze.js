@@ -24,23 +24,25 @@ module.exports = () => {
 
     const getImageDescription = async (request, response) => {
         try {
+            console.log("Get image description request received...");
             const labels = await analyzeImage(request);
             response.status(200).send(labels);
 
         } catch (err) {
             console.log(err);
-            response.status(500).send('Something went wrong with the server!');
+            response.status(500).send('Something went wrong with the server...');
         }
     };
 
     const getTextAudio = async (request, response) => {
         try {
+            console.log("Get text audio request received...");
             const audioUrl = await analyzeText(request.body.content);
             response.status(200).send({ audioUrl: audioUrl });
 
         } catch (err) {
             console.log(err);
-            response.status(500).send('Something went wrong with the server!');
+            response.status(500).send('Something went wrong with the server...');
         }
     };
 
