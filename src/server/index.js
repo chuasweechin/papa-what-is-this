@@ -1,4 +1,5 @@
 const http = require('http');
+const {resolve} = require('path');
 const express = require('express');
 const methodOverride = require('method-override');
 const multer  = require('multer');
@@ -44,7 +45,8 @@ app.use(
 app.use(express.json());
 
 // this is to enable request.body for multi-part form request
-app.use(multer({ dest:'./src/server/uploads/images/' }).single('file'));
+app.use(multer({ dest: resolve(__dirname, 'uploads/images') }).single('file'));
+
 
 // Set react-views to be the default view engine
 const reactEngine = require('express-react-views').createEngine();

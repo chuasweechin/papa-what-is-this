@@ -1,5 +1,6 @@
 const fs = require('fs');
 const util = require('util');
+const {resolve} = require('path');
 const vision = require('@google-cloud/vision');
 const { Storage } = require('@google-cloud/storage');
 const textToSpeech = require('@google-cloud/text-to-speech');
@@ -19,7 +20,6 @@ module.exports = () => {
     const storageClient = new Storage(credentials);
     const visionClient = new vision.ImageAnnotatorClient(credentials);
     const speechClient = new textToSpeech.TextToSpeechClient(credentials);
-
 
     const getImageDescription = async (request, response) => {
         try {
@@ -60,7 +60,7 @@ module.exports = () => {
 
     const analyzeText = async (content) => {
         try {
-            const directory = `./src/server/uploads/speeches/`;
+            const directory = resolve(__dirname, '..', 'uploads/speeches');
 
             const filename = content.replace(/ /g,"-") + `.mp3`;
             const filenameWithPath = directory + filename;
