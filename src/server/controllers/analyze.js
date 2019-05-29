@@ -1,10 +1,9 @@
+const fs = require('fs');
+const util = require('util');
 const fetch = require('node-fetch');
 const vision = require('@google-cloud/vision');
 const { Storage } = require('@google-cloud/storage');
 const textToSpeech = require('@google-cloud/text-to-speech');
-
-const fs = require('fs');
-const util = require('util');
 
 module.exports = () => {
     const storageClient = new Storage();
@@ -13,64 +12,86 @@ module.exports = () => {
 
     const GOOGLE_STORAGE_URL = process.env.GOOGLE_STORAGE_URL;
     const GOOGLE_STORAGE_BUCKET_NAME = process.env.GOOGLE_STORAGE_BUCKET_NAME;
-    const GOOGLE_KNOWLEDGE_GRAPH_API_KEY = process.env.GOOGLE_KNOWLEDGE_GRAPH_API_KEY;
 
-    const getAll = async (request, response) => {
+    const getImageDescription = async (request, response) => {
         try {
             const labels = await analyzeImage(request);
-            await analyzeSpeech(labels.webEntities)
+            response.status(200).send(labels);
 
-            // console.log(labels.webEntities);
-            console.log("after speech");
-            response.status(200);
-            response.send(labels);
-
-        } catch (err){
+        } catch (err) {
             console.log(err);
-            response.status(404);
-            response.send("Not found");
+            response.status(500).send('Something went wrong with the server!');
+        }
+    };
+
+    const getTextAudio = async (request, response) => {
+        try {
+            const audioUrl = await analyzeText(request.body.content);
+            response.status(200).send({ audioUrl: audioUrl });
+
+        } catch (err) {
+            console.log(err);
+            response.status(500).send('Something went wrong with the server!');
         }
     };
 
     const analyzeImage = async (request) => {
         try {
             const [result] = await visionClient.webDetection(request.file.path);
+            fileCleanUp(request.file.path);
+
             return result.webDetection;
 
-        } catch (err) {
-            return err;
+        } catch(err) {
+            console.log("[ERROR] An error occurred in analyzing image");
+            throw err;
         }
     }
 
-    const analyzeSpeech = async (webEntities) => {
-        const fileType = `.mp3`;
-        const directory = `./src/server/uploads/speeches/`;
+    const analyzeText = async (content) => {
+        try {
+            const directory = `./src/server/uploads/speeches/`;
 
-        for (let i = 0; i < webEntities.length; i++) {
-            const filename = webEntities[i].description.replace(/ /g,"-") + fileType;
+            const filename = content.replace(/ /g,"-") + `.mp3`;
             const filenameWithPath = directory + filename;
 
             const request = {
-                input: { text: webEntities[i].description },
+                input: { text: content },
                 voice: { languageCode: 'en-SG', ssmlGender: 'MALE' },
                 audioConfig: { audioEncoding: 'MP3' },
             };
 
             const [response] = await speechClient.synthesizeSpeech(request);
 
-            await fs.writeFile(filenameWithPath, response.audioContent, 'binary', async () => {
-                await storageClient.bucket(GOOGLE_STORAGE_BUCKET_NAME).upload(filenameWithPath, {
-                    gzip: true,
-                    metadata: {
-                        cacheControl: 'public, max-age=31536000',
-                    },
-                });
-                webEntities[i].speechUrl = GOOGLE_STORAGE_URL + GOOGLE_STORAGE_BUCKET_NAME + "/" + filename;
+            await fs.writeFile(filenameWithPath, response.audioContent, 'binary', () => {});
+
+            await storageClient.bucket(GOOGLE_STORAGE_BUCKET_NAME).upload(filenameWithPath, {
+                gzip: true,
+                metadata: {
+                    cacheControl: 'public, max-age=31536000',
+                },
             });
+
+            fileCleanUp(filenameWithPath);
+
+            return GOOGLE_STORAGE_URL + GOOGLE_STORAGE_BUCKET_NAME + "/" + filename;
+
+        } catch(err) {
+            console.log("[ERROR] An error occurred in analyzing text");
+            throw err;
         }
     }
 
+    const fileCleanUp = (fileWithPath) => {
+        console.log(fileWithPath + " deleted after processing");
+
+        fs.unlink(fileWithPath, err => {
+            if (err) throw err;
+        });
+    };
+
     return {
-        getAll
+        getImageDescription,
+        getTextAudio
     };
 };

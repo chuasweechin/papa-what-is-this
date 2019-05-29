@@ -46,19 +46,24 @@ class App extends React.Component {
         } else {
             this.setState({ "loading": true });
 
-            let formData = new FormData();
+            const formData = new FormData();
             formData.append("file", e.target.image.files[0]);
 
-            const response = await fetch("/analyze", {
-                method: 'POST',
-                mode: 'cors',
-                credentials: 'same-origin',
-                referrer: 'no-referrer',
-                body: formData
+            const response = await fetch("/analyzeImage", {
+                'method': 'POST',
+                'mode': 'cors',
+                'credentials': 'same-origin',
+                'referrer': 'no-referrer',
+                'body': formData
             });
 
-            const data = await response.json();
-            this.setState({ "result": [data], "loading": false  });
+            if (response.status === 200) {
+                const data = await response.json();
+                this.setState({ "result": [data], "loading": false  });
+            } else {
+                this.setState({ "result": [], "loading": false  });
+                alert("There is an internal server error. Please try again.");
+            }
         }
     }
 

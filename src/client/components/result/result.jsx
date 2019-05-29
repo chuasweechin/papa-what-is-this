@@ -4,9 +4,28 @@ import PropTypes from 'prop-types';
 import styles from './styles.scss'
 
 class Result extends React.Component {
+    async playSpeechHandler(e, str, player) {
+        e.preventDefault();
 
-    playSpeechHandler(index) {
-        document.querySelectorAll("audio")[index].play();
+        const formData = new FormData();
+        formData.append("content", str);
+
+        const response = await fetch("/analyzeText", {
+            'method': 'POST',
+            'mode': 'cors',
+            'credentials': 'same-origin',
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'referrer': 'no-referrer',
+            'body': formData
+        });
+
+        if (response.status === 200) {
+            const data = await response.json();
+            player.src = data.audioUrl;
+            player.play();
+        } else {
+            alert("There is an internal server error. Please try again.");
+        }
     }
 
     render() {
@@ -15,8 +34,10 @@ class Result extends React.Component {
                 return (
                     <tr key={ index + 1 }>
                         <td className={ styles.play }>
-                            <audio name="speech" src={ item.speechUrl } type="audio/mpeg"></audio>
-                            <button id={ index } type="button" onClick={ () => { this.playSpeechHandler(index) } }>Read Text</button>
+                            <form onSubmit={ (e) => { this.playSpeechHandler(e, item.description, this.player) } }>
+                                <audio ref={ ref => this.player = ref } type="audio/mpeg"></audio>
+                                <button type="submit">Read Text</button>
+                            </form>
                         </td>
                         <td className={ item.score > 0.8 ? styles.high : '' }>
                             { item.description }
