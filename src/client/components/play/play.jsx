@@ -32,7 +32,6 @@ class Play extends React.Component {
         if (response.status === 200) {
             const data = await response.json();
             this.setState({ "audioUrl": data.audioUrl });
-
             player.play();
             this.setState({ 'loading': false });
 
@@ -48,11 +47,11 @@ class Play extends React.Component {
                 <audio ref={ ref => this.player = ref } src={ this.state.audioUrl } type="audio/mpeg"/>
                 {
                     this.state.loading === true ? (
-                        <button type="submit" disabled>
-                            <span className="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"/>Loading...
+                        <button className={ styles.play } type="submit" disabled>
+                            <span className="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"/>
                         </button>
                     ) : (
-                        <button type="submit">Read Text</button>
+                        <button className={ styles.play } type="submit">Play Audio</button>
                     )
                 }
             </form>

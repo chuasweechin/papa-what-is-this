@@ -12,3 +12,17 @@ body {
 	min-height: 800px;
 	padding: 30px 0px 30px 75px;
 }
+
+@media only screen and (max-width: 750px) {
+	.search {
+		padding: 30px;
+		min-height: 400px;
+		border-right: 0px solid #EBEBEB;
+		border-bottom: 3px solid #EBEBEB;
+	}
+
+	.result {
+		min-height: 400px;
+		padding: 30px 30px 30px 30px;
+	}
+}

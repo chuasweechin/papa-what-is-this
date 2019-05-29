@@ -11,7 +11,7 @@ class Upload extends React.Component {
                     this.props.imageSrc === "" ? '': (
                         <div>
                             <h5>Uploaded Image:</h5>
-                            <img src={ this.props.imageSrc } className={ styles.image } height="250px" alt="Image preview..."/>
+                            <img src={ this.props.imageSrc } className={ styles.image } alt="Image preview..."/>
                         </div>
                     )
                 }

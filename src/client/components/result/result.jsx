@@ -35,6 +35,13 @@ class Result extends React.Component {
               <div>
                 <p className={ styles.desc }>Entities identified within the uploaded image</p>
                 <table className={ styles.result + " table" }>
+                    <thead>
+                        <tr>
+                          <th scope="col"></th>
+                          <th scope="col">Description</th>
+                          <th scope="col">Score</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         { webEntitiesElements }
                     </tbody>
