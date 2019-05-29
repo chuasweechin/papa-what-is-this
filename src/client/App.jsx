@@ -70,6 +70,9 @@ class App extends React.Component {
     render() {
         return (
             <div>
+                <div className={ styles.header }>
+                    <h3>Papa, what is this?</h3>
+                </div>
                 <div className="container">
                     <div className="row">
                         <div className={ styles.search + " col-md-5" }>
