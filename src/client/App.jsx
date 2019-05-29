@@ -58,7 +58,6 @@ class App extends React.Component {
             });
 
             const data = await response.json();
-            // console.log([data]);
             this.setState({ "result": [data], "loading": false  });
         }
     }
