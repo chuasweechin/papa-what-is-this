@@ -1,6 +1,5 @@
 const fs = require('fs');
 const util = require('util');
-const fetch = require('node-fetch');
 const vision = require('@google-cloud/vision');
 const { Storage } = require('@google-cloud/storage');
 const textToSpeech = require('@google-cloud/text-to-speech');
