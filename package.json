@@ -8,7 +8,7 @@
   "description": "React boilerplate with ES2015, Express.js, and Webpack 3",
   "license": "MIT",
   "engines": {
-    "node": "8.9.0"
+    "node": "12.1.0"
   },
   "repository": {
     "type": "git",

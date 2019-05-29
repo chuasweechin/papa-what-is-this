@@ -7,7 +7,8 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 process.env.PORT = process.env.PORT || 3000;
 
 // make sure user defined env config exist
-if (process.env.GOOGLE_STORAGE_URL === undefined
+if (process.env.PORT === undefined
+    || process.env.GOOGLE_STORAGE_URL === undefined
         || process.env.GOOGLE_PROJECT_ID === undefined
             || process.env.GOOGLE_CLIENT_EMAIL === undefined
                     || process.env.GOOGLE_PRIVATE_KEY === undefined
