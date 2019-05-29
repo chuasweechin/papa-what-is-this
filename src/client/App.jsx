@@ -61,8 +61,8 @@ class App extends React.Component {
                 const data = await response.json();
                 this.setState({ "result": [data], "loading": false  });
             } else {
-                this.setState({ "result": [], "loading": false  });
                 alert("There is an internal server error. Please try again.");
+                this.setState({ "result": [], "loading": false  });
             }
         }
     }
@@ -72,7 +72,7 @@ class App extends React.Component {
             <div>
                 <div className="container">
                     <div className="row">
-                        <div className={ styles.search + " col-5" }>
+                        <div className={ styles.search + " col-md-5" }>
                             <Search
                                 valid={ this.state.valid }
                                 loading={ this.state.loading }
@@ -85,7 +85,7 @@ class App extends React.Component {
                                 imageSrc={ this.state.imageSrc }
                             />
                         </div>
-                        <div className={ styles.result + " col-7" }>
+                        <div className={ styles.result + " col-md-7" }>
                             <Result
                                 result={ this.state.result }
                             />

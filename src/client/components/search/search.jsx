@@ -68,8 +68,8 @@ class Search extends React.Component {
 Search.propTypes = {
     valid: PropTypes.bool.isRequired,
     loading: PropTypes.bool.isRequired,
-    imageFileName: PropTypes.string.isRequired,
     searchHandler: PropTypes.func.isRequired,
+    imageFileName: PropTypes.string.isRequired,
     uploadImageHandler: PropTypes.func.isRequired,
 };
 

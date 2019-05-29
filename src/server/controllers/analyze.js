@@ -72,7 +72,8 @@ module.exports = () => {
                 },
             });
 
-            fileCleanUp(filenameWithPath);
+            // crashes the server if the same file is remove while other concurrent trend are running
+            // fileCleanUp(filenameWithPath);
 
             return GOOGLE_STORAGE_URL + GOOGLE_STORAGE_BUCKET_NAME + "/" + filename;
 
