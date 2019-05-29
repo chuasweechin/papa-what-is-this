@@ -71,7 +71,7 @@ class App extends React.Component {
         return (
             <div>
                 <div className={ styles.header }>
-                    <h3>Papa, what is this?</h3>
+                    <h3>Papa, what is this animal?</h3>
                 </div>
                 <div className="container">
                     <div className="row">
