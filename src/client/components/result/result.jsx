@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Play from '../play/play';
+import Entity from '../entity/entity';
 
 import styles from './styles.scss'
 
@@ -15,24 +15,15 @@ class Result extends React.Component {
                 .map((item, index) => {
                     return (
                         <tr key={ index + 1 }>
-                            <td className={ styles.play }>
-                                <Play webEntity = { item }/>
-                            </td>
-                            <td className={ item.score > 0.8 ? styles.high : '' }>
-                                { item.description }
-                            </td>
-
-                            <td className={ item.score > 0.8 ? styles.high + ' ' + styles.score : styles.score }>
-                                { item.score.toFixed(2) }
-                            </td>
+                            <Entity webEntity={ item }/>
                         </tr>
                     );
                 });
 
-            const visuallySimilarImagesElements = this.props.result[0].visuallySimilarImages.map( (item, index) => {
-                return (
+            const visuallySimilarImagesElements = this.props.result[0].visuallySimilarImages.map((item, index) => {
+                    return (
                         <img key={ index + 1 } src={ item.url } height="100px" alt=" Similar image..."/>
-                );
+                    );
             });
 
             return (

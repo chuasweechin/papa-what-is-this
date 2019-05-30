@@ -1,11 +1,23 @@
-.play {
+.playerColumn {
+	width: 22%;
+}
+
+.player {
 	width: 100px;
 	border-radius: 5px;
 	background-color: #FFFFFF;
 	border: 1px solid gray;
 }
 
-.play:hover {
+.player:hover {
 	width: 100px;
 	background-color: darkgrey;
+}
+
+.high {
+	color: #12A163;
+}
+
+.scoreColumn {
+	width: 20%;
 }
