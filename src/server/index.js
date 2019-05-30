@@ -14,7 +14,7 @@ if (process.env.PORT === undefined
             || process.env.GOOGLE_CLIENT_EMAIL === undefined
                     || process.env.GOOGLE_PRIVATE_KEY === undefined
                         || process.env.GOOGLE_STORAGE_BUCKET_NAME === undefined) {
-    onUnhandledError("Missing ENV from env.config");
+    onUnhandledError("Missing ENV from config.env");
 }
 
 function onUnhandledError(err) {

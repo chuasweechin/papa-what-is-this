@@ -63,7 +63,7 @@ module.exports = () => {
             const directory = resolve(__dirname, '..', 'uploads/speeches');
 
             const filename = content.replace(/ /g,"-") + `.mp3`;
-            const filenameWithPath = directory + filename;
+            const filenameWithPath = directory + "/" + filename;
 
             const request = {
                 input: { text: content },
