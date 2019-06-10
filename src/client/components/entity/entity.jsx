@@ -15,28 +15,36 @@ class Entity extends React.Component {
 
     async playSpeechHandler(e, str, player) {
         e.preventDefault();
-        this.setState({ 'loading': true });
 
-        const formData = new FormData();
-        formData.append("content", str);
+        if (this.state.audioUrl === "") {
+            player.load();
+            this.setState({ 'loading': true });
 
-        const response = await fetch("/analyzeText", {
-            'method': 'POST',
-            'mode': 'cors',
-            'credentials': 'same-origin',
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'referrer': 'no-referrer',
-            'body': formData
-        });
+            const formData = new FormData();
+            formData.append("content", str);
 
-        if (response.status === 200) {
-            const data = await response.json();
-            this.setState({ "audioUrl": data.audioUrl });
-            player.play();
-            this.setState({ 'loading': false });
+            const response = await fetch("/analyzeText", {
+                'method': 'POST',
+                'mode': 'cors',
+                'credentials': 'same-origin',
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'referrer': 'no-referrer',
+                'body': formData
+            });
 
+            if (response.status === 200) {
+                const data = await response.json();
+                this.setState({ "audioUrl": data.audioUrl });
+                await player.play();
+                this.setState({ 'loading': false });
+            } else {
+                alert("There is an internal server error. Please try again.");
+                this.setState({ 'loading': false });
+            }
         } else {
-            alert("There is an internal server error. Please try again.");
+            player.load();
+            this.setState({ 'loading': true });
+            await player.play();
             this.setState({ 'loading': false });
         }
     }
